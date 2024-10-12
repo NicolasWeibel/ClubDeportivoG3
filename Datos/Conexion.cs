@@ -18,11 +18,11 @@ namespace ClubDeportivoG3.Datos
         private static Conexion? con = null;
 
         private Conexion() {
-            this.baseDatos = "Proyecto";
+            this.baseDatos = "baseusuarios";
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-            this.clave = "";
+            this.clave = "1234";
          }
 
         // proceso de interacción
