@@ -67,7 +67,9 @@ namespace ClubDeportivoG3
             if (tablaLogin.Rows.Count > 0)
             {
                 // quiere decir que el resultado tiene 1 fila por lo que el  usuario EXISTE
-            MessageBox.Show("Ingreso exitoso");
+                MessageBox.Show("Ingreso exitoso");
+                OpcionesForm nuevoFormulario = new OpcionesForm(); // Crear instancia del segundo form
+                nuevoFormulario.Show(); // Mostrar el nuevo form
             }
             else
             {
