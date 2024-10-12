@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            btnInscribirSocio = new Button();
             SuspendLayout();
+            // 
+            // btnInscribirSocio
+            // 
+            btnInscribirSocio.Location = new Point(273, 125);
+            btnInscribirSocio.Name = "btnInscribirSocio";
+            btnInscribirSocio.Size = new Size(207, 126);
+            btnInscribirSocio.TabIndex = 0;
+            btnInscribirSocio.Text = "Inscribir Socio";
+            btnInscribirSocio.UseVisualStyleBackColor = true;
+            btnInscribirSocio.Click += button1_Click;
             // 
             // OpcionesForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnInscribirSocio);
             Name = "OpcionesForm";
             Text = "Opciones";
             Load += Form2_Load;
@@ -42,5 +54,7 @@
         }
 
         #endregion
+
+        private Button btnInscribirSocio;
     }
 }
