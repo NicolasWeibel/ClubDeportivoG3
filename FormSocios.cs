@@ -22,7 +22,9 @@ namespace ClubDeportivoG3
         {
             InitializeComponent();
             CargarSocios();
+            
         }
+        
 
         private void CargarSocios()
         {

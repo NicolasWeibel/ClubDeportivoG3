@@ -27,7 +27,7 @@ namespace ClubDeportivoG3
             cmbEstadoPago.Items.Clear(); // Limpiamos el cmb porque hice modificaciones que no se actualizan
             // Nos aseguramos de que solo aparezcan estas dos opciones
             cmbEstadoPago.Items.Add("Pagado"); 
-            cmbEstadoPago.Items.Add("Pendiente");
+            cmbEstadoPago.Items.Add("Pendiente");            
         }
 
 

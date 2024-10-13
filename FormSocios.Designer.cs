@@ -87,15 +87,17 @@
             // lblListaSocios
             // 
             lblListaSocios.AutoSize = true;
-            lblListaSocios.Location = new Point(548, 36);
+            lblListaSocios.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblListaSocios.Location = new Point(548, 23);
             lblListaSocios.Name = "lblListaSocios";
-            lblListaSocios.Size = new Size(114, 20);
+            lblListaSocios.Size = new Size(183, 31);
             lblListaSocios.TabIndex = 4;
             lblListaSocios.Text = "Lista de Socios: ";
             lblListaSocios.Click += lblListaSocios_Click;
             // 
             // panel1
             // 
+            panel1.BackColor = Color.White;
             panel1.Controls.Add(dataGridViewSocios);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
@@ -105,6 +107,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.AntiqueWhite;
             panel2.Controls.Add(btnEliminarSocio);
             panel2.Controls.Add(btnAgregarSocio);
             panel2.Controls.Add(btnModificarSocio);
@@ -116,6 +119,7 @@
             // 
             // panel3
             // 
+            panel3.BackColor = Color.AntiqueWhite;
             panel3.Controls.Add(lblListaSocios);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
