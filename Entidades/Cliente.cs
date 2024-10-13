@@ -82,7 +82,7 @@ namespace ClubDeportivoG3.Entidades
                         cmd.Parameters.AddWithValue("@Mail", this.mail); // Correo electrónico del cliente
                         cmd.Parameters.AddWithValue("@Telefono", this.telefono); // Teléfono del cliente
                         cmd.Parameters.AddWithValue("@AptoFisico", this.aptoFisico); // Estado de aptitud física del cliente
-
+                        
                         // Se ejecuta la consulta para insertar el cliente en la base de datos
                         cmd.ExecuteNonQuery();
                     }
