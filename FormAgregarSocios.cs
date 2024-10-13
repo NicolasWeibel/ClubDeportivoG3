@@ -28,9 +28,6 @@ namespace ClubDeportivoG3
             // Nos aseguramos de que solo aparezcan estas dos opciones
             cmbEstadoPago.Items.Add("Pagado"); 
             cmbEstadoPago.Items.Add("Pendiente");
-            
-        
-
         }
 
 
