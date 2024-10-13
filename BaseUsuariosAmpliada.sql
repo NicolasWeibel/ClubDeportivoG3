@@ -25,7 +25,7 @@ CREATE TABLE Socio (
     carnet_entregado BOOLEAN,
     cuota_mensual DECIMAL(10, 2),
     estado_pago BOOLEAN,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id)
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
 );
 
 CREATE TABLE NoSocio (
