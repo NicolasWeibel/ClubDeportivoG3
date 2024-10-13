@@ -16,19 +16,27 @@ namespace ClubDeportivoG3
 {
     public partial class FormAgregarSocios : Form
     {
-        
+
 
 
         public FormAgregarSocios()
         {
             InitializeComponent();
+
+            // Poblar el ComboBox de estado de pago
+            cmbEstadoPago.Items.Clear(); // Limpiamos el cmb porque hice modificaciones que no se actualizan
+            // Nos aseguramos de que solo aparezcan estas dos opciones
+            cmbEstadoPago.Items.Add("Pagado"); 
+            cmbEstadoPago.Items.Add("Pendiente");
             
+        
+
         }
 
 
         private void FormAgregarSocios_Load(object sender, EventArgs e)
         {
-            
+
         }
         private bool EsEmailValido(string email)
         {
@@ -58,6 +66,9 @@ namespace ClubDeportivoG3
                 return; // Salimos del método si el formato no es válido
             }
 
+            // Convertir el valor seleccionado del ComboBox en un booleano
+            bool estadoPago = cmbEstadoPago.SelectedItem.ToString() == "Pagado";
+
             // Crea un nuevo socio con los datos del formulario
             Socio nuevoSocio = new Socio(
                                      txtNombre.Text,
@@ -65,11 +76,11 @@ namespace ClubDeportivoG3
                                      txtDNI.Text,
                                      txtMail.Text,
                                      txtTelefono.Text,
-                                     chkAptoFisico.Checked, // Asegúrate de que estás utilizando Checked
+                                     chkAptoFisico.Checked, 
                                      0,
-                                     chkCarnetEntrega.Checked, // Asegúrate de que estás utilizando Checked
+                                     chkCarnetEntrega.Checked, 
                                      nudCuotaMensual.Value,
-                                     false
+                                     estadoPago // Aquí se asigna el valor del estado de pago
                                           );
 
             // Llama al método para guardar el socio en la base de datos
@@ -86,6 +97,11 @@ namespace ClubDeportivoG3
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close(); // Cerrar el formulario
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
