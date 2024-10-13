@@ -50,7 +50,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(218, 489);
+            label7.Location = new Point(285, 489);
             label7.Name = "label7";
             label7.Size = new Size(107, 20);
             label7.TabIndex = 30;
@@ -59,7 +59,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(218, 361);
+            label5.Location = new Point(285, 361);
             label5.Name = "label5";
             label5.Size = new Size(67, 20);
             label5.TabIndex = 29;
@@ -68,7 +68,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(218, 305);
+            label4.Location = new Point(285, 305);
             label4.Name = "label4";
             label4.Size = new Size(38, 20);
             label4.TabIndex = 28;
@@ -77,7 +77,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(218, 244);
+            label3.Location = new Point(285, 244);
             label3.Name = "label3";
             label3.Size = new Size(35, 20);
             label3.TabIndex = 27;
@@ -86,7 +86,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(218, 188);
+            label2.Location = new Point(285, 188);
             label2.Name = "label2";
             label2.Size = new Size(66, 20);
             label2.TabIndex = 26;
@@ -95,7 +95,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(218, 124);
+            label1.Location = new Point(285, 124);
             label1.Name = "label1";
             label1.Size = new Size(64, 20);
             label1.TabIndex = 25;
@@ -103,9 +103,9 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(502, 600);
+            btnCancelar.Location = new Point(623, 600);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(94, 29);
+            btnCancelar.Size = new Size(160, 29);
             btnCancelar.TabIndex = 24;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
@@ -113,9 +113,9 @@
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(357, 600);
+            btnGuardar.Location = new Point(389, 600);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(94, 29);
+            btnGuardar.Size = new Size(160, 29);
             btnGuardar.TabIndex = 23;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
@@ -123,16 +123,16 @@
             // 
             // nudCuotaMensual
             // 
-            nudCuotaMensual.Location = new Point(421, 487);
+            nudCuotaMensual.Location = new Point(488, 487);
             nudCuotaMensual.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudCuotaMensual.Name = "nudCuotaMensual";
-            nudCuotaMensual.Size = new Size(125, 27);
+            nudCuotaMensual.Size = new Size(191, 27);
             nudCuotaMensual.TabIndex = 22;
             // 
             // chkAptoFisico
             // 
             chkAptoFisico.AutoSize = true;
-            chkAptoFisico.Location = new Point(421, 429);
+            chkAptoFisico.Location = new Point(488, 429);
             chkAptoFisico.Name = "chkAptoFisico";
             chkAptoFisico.Size = new Size(105, 24);
             chkAptoFisico.TabIndex = 21;
@@ -141,43 +141,43 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(421, 358);
+            txtTelefono.Location = new Point(488, 358);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(125, 27);
+            txtTelefono.Size = new Size(191, 27);
             txtTelefono.TabIndex = 20;
             // 
             // txtMail
             // 
-            txtMail.Location = new Point(421, 302);
+            txtMail.Location = new Point(488, 302);
             txtMail.Name = "txtMail";
-            txtMail.Size = new Size(125, 27);
+            txtMail.Size = new Size(191, 27);
             txtMail.TabIndex = 19;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(421, 185);
+            txtApellido.Location = new Point(488, 185);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(125, 27);
+            txtApellido.Size = new Size(191, 27);
             txtApellido.TabIndex = 18;
             // 
             // txtDNI
             // 
-            txtDNI.Location = new Point(421, 241);
+            txtDNI.Location = new Point(488, 241);
             txtDNI.Name = "txtDNI";
-            txtDNI.Size = new Size(125, 27);
+            txtDNI.Size = new Size(191, 27);
             txtDNI.TabIndex = 17;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(421, 126);
+            txtNombre.Location = new Point(488, 126);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(125, 27);
+            txtNombre.Size = new Size(191, 27);
             txtNombre.TabIndex = 16;
             // 
             // chkCarnetEntrega
             // 
             chkCarnetEntrega.AutoSize = true;
-            chkCarnetEntrega.Location = new Point(421, 549);
+            chkCarnetEntrega.Location = new Point(488, 549);
             chkCarnetEntrega.Name = "chkCarnetEntrega";
             chkCarnetEntrega.Size = new Size(151, 24);
             chkCarnetEntrega.TabIndex = 31;

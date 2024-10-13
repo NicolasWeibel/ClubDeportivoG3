@@ -31,13 +31,13 @@ namespace ClubDeportivoG3.Entidades
         public void AbonarCuota()
         {
             estadoPago = true;
-            // Lógica para registrar el pago de la cuota
+            // Después vemos esto
         }
 
         public void EntregarCarnet()
         {
             carnetEntrega = true;
-            // Lógica para registrar que el carnet fue entregado
+            // Después vemos esto
         }
 
         public static List<Socio> ListarSocios()
@@ -133,6 +133,31 @@ namespace ClubDeportivoG3.Entidades
             {
                 MessageBox.Show($"Error al dar de alta al socio: {ex.Message}");
             }
+        }
+        public override void DarBaja(int idCliente)
+        {
+            // Primero, elimina al socio en la tabla Socio
+            try
+            {
+                using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
+                {
+                    conn.Open();
+                    string query = "DELETE FROM Socio WHERE id_cliente = @id_cliente";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id_cliente", idCliente);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el socio: " + ex.Message);
+            }
+
+            // Luego, elimina al cliente (superclase)
+            base.DarBaja(idCliente); // Elimina el cliente correspondiente en la base de datos
         }
 
         private int ObtenerIdClientePorDNI(string dni)

@@ -25,9 +25,8 @@ namespace ClubDeportivoG3
 
         private void CargarSocios()
         {
-            dataGridViewSocios.DataSource = null; // Limpia el DataGridView
-            var socios = Socio.ListarSocios();
-            dataGridViewSocios.DataSource = socios;
+            dataGridViewSocios.DataSource = Socio.ListarSocios();
+            
         }
 
         private void btnAgregarSocio_Click_1(object sender, EventArgs e)
@@ -47,8 +46,25 @@ namespace ClubDeportivoG3
 
         private void btnEliminarSocio_Click_1(object sender, EventArgs e)
         {
+            // Verifica si se ha seleccionado una fila
+            if (dataGridViewSocios.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Por favor, seleccione un socio para dar de baja.", "Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            // Aquí asegúrate de usar el nombre correcto de la columna
+            int idCliente = Convert.ToInt32(dataGridViewSocios.SelectedRows[0].Cells["Id"].Value);
+
+            // Crear una instancia de Socio para usar el método DarBaja
+            Socio socio = new Socio("nombre", "apellido", "dni", "mail", "telefono", true, idCliente, false, 0m, false); // Usar valores de prueba o correctos según sea necesario
+            socio.DarBaja(idCliente); // Llama al método de baja pasando el id_cliente
+
+            // Actualiza el DataGridView
+            CargarSocios(); // Método para actualizar la lista
         }
+
+
 
         private void lblListaSocios_Click(object sender, EventArgs e)
         {

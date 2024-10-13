@@ -41,17 +41,17 @@ namespace ClubDeportivoG3
             // Verifica que todos los campos estén correctamente llenos
 
             Socio nuevoSocio = new Socio(
-    txtNombre.Text,
-    txtApellido.Text,
-    txtDNI.Text,
-    txtMail.Text,
-    txtTelefono.Text,
-    chkAptoFisico.Checked,
-    0, // ID, puedes ajustar este valor según tu lógica
-    chkCarnetEntrega.Checked,
-    nudCuotaMensual.Value,
-    false // Estado de pago inicial
-);
+                                     txtNombre.Text,
+                                     txtApellido.Text,
+                                     txtDNI.Text,
+                                     txtMail.Text,
+                                     txtTelefono.Text,
+                                     chkAptoFisico.Checked,
+                                     0, // ID, puedes ajustar este valor según tu lógica
+                                     chkCarnetEntrega.Checked,
+                                     nudCuotaMensual.Value,
+                                     false // Estado de pago inicial
+                                          );
 
             // Llama al método para guardar el socio
             nuevoSocio.DarAlta();

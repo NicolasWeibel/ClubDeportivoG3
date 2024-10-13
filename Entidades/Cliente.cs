@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -87,30 +88,27 @@ namespace ClubDeportivoG3.Entidades
                 MessageBox.Show("Error al dar de alta al cliente: " + ex.Message);
             }
         }
-    
 
-        public virtual void DarBaja()
+
+        public virtual void DarBaja(int idCliente)
         {
             try
             {
                 using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
                 {
                     conn.Open();
-                    // Supongamos que tienes un campo "Estado" que indica si el cliente está activo o no
-                    string query = "UPDATE Cliente SET Estado = 'Inactivo' WHERE DNI = @DNI"; // o usar un ID si lo prefieres
+                    string query = "DELETE FROM Cliente WHERE id_cliente = @id_cliente";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@DNI", this.dni); // Suponiendo que usas DNI para identificar clientes
-
+                        cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                         cmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones
-                MessageBox.Show("Error al dar de baja al cliente: " + ex.Message);
+                MessageBox.Show("Error al eliminar el cliente: " + ex.Message);
             }
         }
 
