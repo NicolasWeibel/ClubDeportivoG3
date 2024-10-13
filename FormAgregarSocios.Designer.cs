@@ -123,6 +123,7 @@
             // nudCuotaMensual
             // 
             nudCuotaMensual.Location = new Point(421, 487);
+            nudCuotaMensual.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudCuotaMensual.Name = "nudCuotaMensual";
             nudCuotaMensual.Size = new Size(125, 27);
             nudCuotaMensual.TabIndex = 22;
