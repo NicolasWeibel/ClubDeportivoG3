@@ -10,32 +10,52 @@ namespace ClubDeportivoG3.Datos
 {
     internal class Conexion
     {
-        private static Conexion? _instancia = null;
+        private string baseDatos;
+        private string servidor;
+        private string puerto;
+        private string usuario;
+        private string clave;
+        private static Conexion? con = null;
 
-        private readonly string baseDatos = "baseusuarios";
-        private readonly string servidor = "localhost";
-        private readonly string puerto = "3306";
-        private readonly string usuario = "root";
-        private readonly string clave = "root";
-
-        // Constructor privado para evitar instanciación externa
-        private Conexion() { }
-
-        // Método para obtener la instancia única
-        public static Conexion getInstancia()
+        private Conexion()
         {
-            if (_instancia == null)
-            {
-                _instancia = new Conexion();
-            }
-            return _instancia;
+            this.baseDatos = "baseusuarios";
+            this.servidor = "localhost";
+            this.puerto = "3306";
+            this.usuario = "root";
+            this.clave = "root";
         }
 
-        // Método para crear la conexión
+        // proceso de interacción
         public MySqlConnection CrearConexion()
         {
-            string cadenaConexion = $"Server={servidor};Port={puerto};Database={baseDatos};User Id={usuario};Password={clave};";
-            return new MySqlConnection(cadenaConexion);
+            // instanciamos una conexion
+            MySqlConnection? cadena = new MySqlConnection();
+            // el bloque try permite controlar errores
+            try
+            {
+                cadena.ConnectionString = "datasource=" + this.servidor +
+                ";port=" + this.puerto +
+                ";username=" + this.usuario +
+                ";password=" + this.clave +
+                ";Database=" + this.baseDatos;
+
+            }
+            catch (Exception ex)
+            {
+                cadena = null;
+                throw;
+            }
+            return cadena;
+        }
+        // para evaluar la instancia de la conectividad
+        public static Conexion getInstancia()
+        {
+            if (con == null) // quiere decir que la conexion esta cerrada
+            {
+                con = new Conexion(); // se crea una nueva
+            }
+            return con;
         }
     }
 }

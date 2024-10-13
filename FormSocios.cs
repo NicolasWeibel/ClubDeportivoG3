@@ -17,6 +17,7 @@ namespace ClubDeportivoG3
     {
         private List<Socio> listaSocios;
 
+        public string NombreUsuario { get; set; }
         public FormSocios()
         {
             InitializeComponent();
@@ -33,6 +34,8 @@ namespace ClubDeportivoG3
         {
             // Abre el formulario para agregar un socio
             FormAgregarSocios agregarSocioForm = new FormAgregarSocios();
+            
+
             agregarSocioForm.ShowDialog();
 
             // Después de cerrar el formulario de agregar, recarga la lista de socios
@@ -52,12 +55,20 @@ namespace ClubDeportivoG3
                 MessageBox.Show("Por favor, seleccione un socio para dar de baja.", "Sin selección", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            
+            DialogResult result = MessageBox.Show("¿Está seguro de que desea dar de baja a este socio?", "Confirmar baja", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            // Aquí asegúrate de usar el nombre correcto de la columna
-            int idCliente = Convert.ToInt32(dataGridViewSocios.SelectedRows[0].Cells["Id"].Value);
+            // Si el usuario selecciona que No, se cancela la operación
+            if (result == DialogResult.No)
+            {
+                return;
+            }
 
-            // Crear una instancia de Socio para usar el método DarBaja
-            Socio socio = new Socio("nombre", "apellido", "dni", "mail", "telefono", true, idCliente, false, 0m, false); // Usar valores de prueba o correctos según sea necesario
+            // Obtiene el ID del cliente de la fila seleccionada y lo convierte a entero
+            int idCliente = Convert.ToInt32(dataGridViewSocios.SelectedRows[0].Cells["Id"].Value); 
+
+            // Creamos una instancia de Socio para usar el método DarBaja
+            Socio socio = new Socio("nombre", "apellido", "dni", "mail", "telefono", true, idCliente, false, 0m, false); // Crea un nuevo objeto Socio con los datos proporcionados
             socio.DarBaja(idCliente); // Llama al método de baja pasando el id_cliente
 
             // Actualiza el DataGridView

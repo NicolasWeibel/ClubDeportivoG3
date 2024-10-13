@@ -12,46 +12,40 @@ namespace ClubDeportivoG3.Datos
 {
     internal class Usuarios
     {
-        // Método que retorna una tabla con la información del login
+        // creamos un metodo que retorne una tabla con la informacion
         public DataTable Log_Usu(string L_Usu, string P_Usu)
         {
-            MySqlDataReader resultado; // Variable de tipo DataReader
+            MySqlDataReader resultado; // variable de tipo datareader
             DataTable tabla = new DataTable();
-            MySqlConnection sqlCon = null; // Inicializa la conexión
-
+            MySqlConnection sqlCon = new MySqlConnection();
             try
             {
-                // Crea la conexión
                 sqlCon = Conexion.getInstancia().CrearConexion();
-
-                // El comando almacena el nombre del procedimiento almacenado
+                // el comando es un elemento que almacena en este caso el nombre
+                // del procedimiento almacenado y la referencia a la conexion
                 MySqlCommand comando = new MySqlCommand("IngresoLogin", sqlCon);
                 comando.CommandType = CommandType.StoredProcedure;
-
-                // Define los parámetros que tiene el procedimiento almacenado
+                // definimos los parametros que tiene el procedure
                 comando.Parameters.Add("Usu", MySqlDbType.VarChar).Value = L_Usu;
                 comando.Parameters.Add("Pass", MySqlDbType.VarChar).Value = P_Usu;
-
-                // Abre la conexión
+                // abrimos la conexion
                 sqlCon.Open();
-
-                // Ejecuta el comando y almacena el resultado
-                resultado = comando.ExecuteReader();
-                tabla.Load(resultado); // Carga la tabla con el resultado
-                return tabla; // Retorna la tabla con los datos
+                resultado = comando.ExecuteReader(); // almacenamos el resulatdo en la variable
+                tabla.Load(resultado); // cargamos la tabla con el resultado
+                return tabla;
+                // de esta forma esta asociado el metodo con el procedure que esta almacenado en MySQL
             }
             catch (Exception ex)
             {
-                throw; // Lanza la excepción
+                throw;
             }
+            // como proceso final
             finally
             {
-                // Cierra la conexión si está abierta
-                if (sqlCon != null && sqlCon.State == ConnectionState.Open)
-                {
-                    sqlCon.Close();
-                }
+                if (sqlCon.State == ConnectionState.Open)
+                { sqlCon.Close(); };
             }
         }
     }
+
 }

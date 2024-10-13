@@ -15,31 +15,35 @@ namespace ClubDeportivoG3
 {
     public partial class FormAgregarSocios : Form
     {
+        
+
+
         public FormAgregarSocios()
         {
             InitializeComponent();
+            
         }
 
 
         private void FormAgregarSocios_Load(object sender, EventArgs e)
         {
+            
+        }       
 
-
-        }
-        private void btnGuardar_Click(object sender, EventArgs e)
-
+        private void btnGuardar_Click_1(object sender, EventArgs e)
         {
+            // Verifica que todos los campos estén llenos antes de continuar
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-        string.IsNullOrWhiteSpace(txtApellido.Text) ||
-        string.IsNullOrWhiteSpace(txtDNI.Text) ||
-        string.IsNullOrWhiteSpace(txtMail.Text) ||
-        string.IsNullOrWhiteSpace(txtTelefono.Text))
+                string.IsNullOrWhiteSpace(txtApellido.Text) ||
+                string.IsNullOrWhiteSpace(txtDNI.Text) ||
+                string.IsNullOrWhiteSpace(txtMail.Text) ||
+                string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
                 MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Campo incompleto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // Salimos del método si hay campos vacíos
             }
-            // Verifica que todos los campos estén correctamente llenos
 
+            // Crea un nuevo socio con los datos del formulario
             Socio nuevoSocio = new Socio(
                                      txtNombre.Text,
                                      txtApellido.Text,
@@ -47,27 +51,26 @@ namespace ClubDeportivoG3
                                      txtMail.Text,
                                      txtTelefono.Text,
                                      chkAptoFisico.Checked,
-                                     0, // ID, puedes ajustar este valor según tu lógica
+                                     0,
                                      chkCarnetEntrega.Checked,
                                      nudCuotaMensual.Value,
-                                     false // Estado de pago inicial
+                                     false
                                           );
 
-            // Llama al método para guardar el socio
+            // Llama al método para guardar el socio en la base de datos
             nuevoSocio.DarAlta();
 
-            // Cierra el formulario después de guardar
-            this.DialogResult = DialogResult.OK; // Establece el resultado del diálogo
+            // Mostrar mensaje de confirmación
+            MessageBox.Show("El socio ha sido guardado exitosamente.", "Confirmación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Cierra el formulario después de guardar y confirma el resultado
+            this.DialogResult = DialogResult.OK;
             this.Close(); // Cierra el formulario
         }
 
-
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             this.Close(); // Cerrar el formulario
         }
-
-
-
     }
 }

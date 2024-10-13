@@ -23,6 +23,7 @@ namespace ClubDeportivoG3.Entidades
             this.estadoPago = estadoPago;
         }
 
+        // Propiedades de solo lectura usando la sintaxis abreviada para getters
         public int Id => id;
         public bool CarnetEntrega => carnetEntrega;
         public decimal CuotaMensual => cuotaMensual;
@@ -40,12 +41,16 @@ namespace ClubDeportivoG3.Entidades
             // Después vemos esto
         }
 
-        public static List<Socio> ListarSocios()
+        public static List<Socio> ListarSocios() // Método estático para listar todos los socios
         {
-            List<Socio> listaSocios = new List<Socio>();
+            List<Socio> listaSocios = new List<Socio>(); // Creamos una lista para almacenar los socios
+
+            // Abrimos una conexión a la base de datos
             using (MySqlConnection connection = Conexion.getInstancia().CrearConexion())
             {
                 connection.Open();
+
+                // Definimos la consulta SQL para obtener datos de socios y clientes
                 string query = @"
         SELECT 
             c.id_cliente AS id, 
@@ -62,21 +67,26 @@ namespace ClubDeportivoG3.Entidades
         JOIN 
             Cliente c ON s.id_cliente = c.id_cliente;";
 
+                // Preparamos el comando con la consulta y la conexión
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
+
+                    // Ejecutamos el comando y obtenemos un lector para leer los resultados
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
+                        // Iteramos sobre cada fila de resultados
                         while (reader.Read())
                         {
-                            // Obtener el ID del socio
+                            // Obtenemos el ID del socio
                             int id = reader.GetInt32("id");
 
-                            // Verifica si el socio ya existe en la lista por ID
-                            var socioExistente = listaSocios.FirstOrDefault(s => s.Id == id);
+                            // Verificamos si el socio ya está en la lista usando su ID
+                            var socioExistente = listaSocios.FirstOrDefault(s => s.Id == id); // var permite inferir el tipo de la variable automáticamente basado en el valor que se le asigna.
 
-                            if (socioExistente == null)
+                            if (socioExistente == null) // Si no existe, lo creamos
                             {
-                                // Crear nuevo socio solo si no existe
+                                
+                                // Creamos un nuevo objeto Socio con los datos leídos
                                 Socio socio = new Socio(
                                     reader.GetString("nombre"),
                                     reader.GetString("apellido"),
@@ -89,42 +99,51 @@ namespace ClubDeportivoG3.Entidades
                                     reader.GetDecimal("cuota_mensual"),
                                     reader.GetBoolean("estadoPago")
                                 );
-
+                                
+                                // Agregamos el nuevo socio a la lista
                                 listaSocios.Add(socio);
                             }
                         }
                     }
                 }
             }
-            return listaSocios;
+            return listaSocios; // Retornamos la lista de socios
         }
 
         public override void DarAlta()
         {
-            // Primero, llama al método de la clase base para registrar el cliente
+            // Primero, llama al método de la clase base para registrar al cliente (es como asegurarse de que el cliente ya está en la base de datos).
             base.DarAlta();
 
-            // Luego, registra al socio
+            // Luego, registra al socio en la base de datos
             try
             {
+                // Abre una conexión a la base de datos.
                 using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
                 {
                     conn.Open();
+
+                    // Prepara la consulta SQL para insertar al socio.
                     string query = "INSERT INTO Socio (id_cliente, carnet_entregado, cuota_mensual, estado_pago) VALUES (@id_cliente, @carnet_entregado, @cuota_mensual, @estado_pago);";
 
+                    // Crea el comando SQL con la consulta y la conexión.
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
+                        // Obtiene el ID del cliente usando su DNI (no lo comprendo mucho pero si lo saco rompe todo)
                         int idCliente = ObtenerIdClientePorDNI(this.DNI); // Método ficticio
 
+                        // Añadimos los parámetros necesarios para la consulta.
                         cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                         cmd.Parameters.AddWithValue("@carnet_entregado", carnetEntrega);
                         cmd.Parameters.AddWithValue("@cuota_mensual", cuotaMensual);
                         cmd.Parameters.AddWithValue("@estado_pago", estadoPago);
 
+
+                        // Ejecutamos la consulta para insertar al socio en la base de datos.
                         cmd.ExecuteNonQuery();
 
-                        // Obtener el ID generado
-                        int idGenerado = (int)cmd.LastInsertedId;
+                        // Obtiene el ID generado automáticamente por la base de datos al insertar el nuevo socio.
+                        int idGenerado = (int)cmd.LastInsertedId; // "LastInsertedId" devuelve el último ID creado
                         SetId(idGenerado); // Asigna el ID al objeto Socio
                     }
                 }
@@ -139,15 +158,19 @@ namespace ClubDeportivoG3.Entidades
             // Primero, elimina al socio en la tabla Socio
             try
             {
+                // Abre una conexión a la base de datos para realizar la eliminación.
                 using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
                 {
                     conn.Open();
+
+                    // Prepara la consulta SQL para eliminar al socio basado en el ID del cliente.
                     string query = "DELETE FROM Socio WHERE id_cliente = @id_cliente";
 
+                    // Crea el comando SQL con la consulta y la conexión.
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@id_cliente", idCliente);
-                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@id_cliente", idCliente); // Añade el parámetro del ID del cliente a la consulta.
+                        cmd.ExecuteNonQuery(); // Ejecuta la consulta para eliminar al socio de la base de datos.
                     }
                 }
             }
@@ -157,32 +180,32 @@ namespace ClubDeportivoG3.Entidades
             }
 
             // Luego, elimina al cliente (superclase)
-            base.DarBaja(idCliente); // Elimina el cliente correspondiente en la base de datos
+            base.DarBaja(idCliente); // Aquí se llama al método de la clase base para eliminar el cliente correspondiente en la base de datos.
         }
 
-        private int ObtenerIdClientePorDNI(string dni)
+        private int ObtenerIdClientePorDNI(string dni) // Este método obtiene el ID del cliente basado en su DNI. Dado que no pusimos un idCliente.
         {
-            int idCliente = 0;
+            int idCliente = 0; // Inicializa el ID del cliente en 0.
             using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
             {
-                conn.Open();
-                string query = "SELECT id_cliente FROM Cliente WHERE dni = @DNI";
+                conn.Open();                
+                string query = "SELECT id_cliente FROM Cliente WHERE dni = @DNI"; // Prepara la consulta SQL para buscar el ID del cliente por su DNI.
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@DNI", dni);
-                    object result = cmd.ExecuteScalar();
-                    if (result != null)
+                    cmd.Parameters.AddWithValue("@DNI", dni); // Añade el parámetro del DNI a la consulta.
+                    object result = cmd.ExecuteScalar(); // Ejecuta la consulta y obtiene el resultado.
+                    if (result != null) // Si se encuentra un resultado, convierte el objeto a int.
                     {
                         idCliente = Convert.ToInt32(result);
                     }
                 }
             }
-            return idCliente;
+            return idCliente; // Devuelve el ID del cliente encontrado.
         }
 
-        private void SetId(int id)
+        private void SetId(int id) // Este método establece el ID del socio.
         {
-            this.id = id;
+            this.id = id; // Se asigna el ID al objeto Socio.
         }
     }
 }

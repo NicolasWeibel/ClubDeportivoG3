@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            panel1 = new Panel();
+            lblTitulo = new Label();
+            panel2 = new Panel();
+            panel3 = new Panel();
+            chkCarnetEntrega = new CheckBox();
             label7 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -43,178 +48,228 @@
             txtApellido = new TextBox();
             txtDNI = new TextBox();
             txtNombre = new TextBox();
-            chkCarnetEntrega = new CheckBox();
+            panel1.SuspendLayout();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudCuotaMensual).BeginInit();
             SuspendLayout();
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.AntiqueWhite;
+            panel1.Controls.Add(lblTitulo);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1069, 85);
+            panel1.TabIndex = 0;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.Location = new Point(393, 27);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(260, 31);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "Formulario de Registro";
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.AntiqueWhite;
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(0, 622);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(1069, 99);
+            panel2.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.White;
+            panel3.Controls.Add(chkCarnetEntrega);
+            panel3.Controls.Add(label7);
+            panel3.Controls.Add(label5);
+            panel3.Controls.Add(label4);
+            panel3.Controls.Add(label3);
+            panel3.Controls.Add(label2);
+            panel3.Controls.Add(label1);
+            panel3.Controls.Add(btnCancelar);
+            panel3.Controls.Add(btnGuardar);
+            panel3.Controls.Add(nudCuotaMensual);
+            panel3.Controls.Add(chkAptoFisico);
+            panel3.Controls.Add(txtTelefono);
+            panel3.Controls.Add(txtMail);
+            panel3.Controls.Add(txtApellido);
+            panel3.Controls.Add(txtDNI);
+            panel3.Controls.Add(txtNombre);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(0, 85);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(1069, 537);
+            panel3.TabIndex = 2;
+            // 
+            // chkCarnetEntrega
+            // 
+            chkCarnetEntrega.AutoSize = true;
+            chkCarnetEntrega.Location = new Point(454, 403);
+            chkCarnetEntrega.Name = "chkCarnetEntrega";
+            chkCarnetEntrega.Size = new Size(151, 24);
+            chkCarnetEntrega.TabIndex = 38;
+            chkCarnetEntrega.Text = "Carnet Engregado";
+            chkCarnetEntrega.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(285, 489);
+            label7.Location = new Point(251, 354);
             label7.Name = "label7";
             label7.Size = new Size(107, 20);
-            label7.TabIndex = 30;
+            label7.TabIndex = 46;
             label7.Text = "Cuota Mensual";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(285, 361);
+            label5.Location = new Point(251, 258);
             label5.Name = "label5";
             label5.Size = new Size(67, 20);
-            label5.TabIndex = 29;
+            label5.TabIndex = 45;
             label5.Text = "Telefono";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(285, 305);
+            label4.Location = new Point(251, 210);
             label4.Name = "label4";
             label4.Size = new Size(38, 20);
-            label4.TabIndex = 28;
+            label4.TabIndex = 44;
             label4.Text = "Mail";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(285, 244);
+            label3.Location = new Point(251, 159);
             label3.Name = "label3";
             label3.Size = new Size(35, 20);
-            label3.TabIndex = 27;
+            label3.TabIndex = 43;
             label3.Text = "DNI";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(285, 188);
+            label2.Location = new Point(251, 113);
             label2.Name = "label2";
             label2.Size = new Size(66, 20);
-            label2.TabIndex = 26;
+            label2.TabIndex = 42;
             label2.Text = "Apellido";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(285, 124);
+            label1.Location = new Point(251, 65);
             label1.Name = "label1";
             label1.Size = new Size(64, 20);
-            label1.TabIndex = 25;
+            label1.TabIndex = 40;
             label1.Text = "Nombre";
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(623, 600);
+            btnCancelar.Location = new Point(593, 457);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(160, 29);
-            btnCancelar.TabIndex = 24;
+            btnCancelar.TabIndex = 41;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
+            btnCancelar.Click += btnCancelar_Click_1;
             // 
             // btnGuardar
             // 
-            btnGuardar.Location = new Point(389, 600);
+            btnGuardar.Location = new Point(359, 457);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(160, 29);
-            btnGuardar.TabIndex = 23;
+            btnGuardar.TabIndex = 39;
             btnGuardar.Text = "Guardar";
             btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += btnGuardar_Click;
+            btnGuardar.Click += btnGuardar_Click_1;
             // 
             // nudCuotaMensual
             // 
-            nudCuotaMensual.Location = new Point(488, 487);
+            nudCuotaMensual.Location = new Point(454, 352);
             nudCuotaMensual.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudCuotaMensual.Name = "nudCuotaMensual";
             nudCuotaMensual.Size = new Size(191, 27);
-            nudCuotaMensual.TabIndex = 22;
+            nudCuotaMensual.TabIndex = 37;
             // 
             // chkAptoFisico
             // 
             chkAptoFisico.AutoSize = true;
-            chkAptoFisico.Location = new Point(488, 429);
+            chkAptoFisico.Location = new Point(454, 307);
             chkAptoFisico.Name = "chkAptoFisico";
             chkAptoFisico.Size = new Size(105, 24);
-            chkAptoFisico.TabIndex = 21;
+            chkAptoFisico.TabIndex = 36;
             chkAptoFisico.Text = "Apto Físico";
             chkAptoFisico.UseVisualStyleBackColor = true;
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(488, 358);
+            txtTelefono.Location = new Point(454, 255);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(191, 27);
-            txtTelefono.TabIndex = 20;
+            txtTelefono.TabIndex = 35;
             // 
             // txtMail
             // 
-            txtMail.Location = new Point(488, 302);
+            txtMail.Location = new Point(454, 207);
             txtMail.Name = "txtMail";
             txtMail.Size = new Size(191, 27);
-            txtMail.TabIndex = 19;
+            txtMail.TabIndex = 34;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(488, 185);
+            txtApellido.Location = new Point(454, 110);
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(191, 27);
-            txtApellido.TabIndex = 18;
+            txtApellido.TabIndex = 32;
             // 
             // txtDNI
             // 
-            txtDNI.Location = new Point(488, 241);
+            txtDNI.Location = new Point(454, 156);
             txtDNI.Name = "txtDNI";
             txtDNI.Size = new Size(191, 27);
-            txtDNI.TabIndex = 17;
+            txtDNI.TabIndex = 33;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(488, 126);
+            txtNombre.Location = new Point(454, 67);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(191, 27);
-            txtNombre.TabIndex = 16;
-            // 
-            // chkCarnetEntrega
-            // 
-            chkCarnetEntrega.AutoSize = true;
-            chkCarnetEntrega.Location = new Point(488, 549);
-            chkCarnetEntrega.Name = "chkCarnetEntrega";
-            chkCarnetEntrega.Size = new Size(151, 24);
-            chkCarnetEntrega.TabIndex = 31;
-            chkCarnetEntrega.Text = "Carnet Engregado";
-            chkCarnetEntrega.UseVisualStyleBackColor = true;
+            txtNombre.TabIndex = 31;
             // 
             // FormAgregarSocios
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1069, 721);
-            Controls.Add(chkCarnetEntrega);
-            Controls.Add(label7);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(btnCancelar);
-            Controls.Add(btnGuardar);
-            Controls.Add(nudCuotaMensual);
-            Controls.Add(chkAptoFisico);
-            Controls.Add(txtTelefono);
-            Controls.Add(txtMail);
-            Controls.Add(txtApellido);
-            Controls.Add(txtDNI);
-            Controls.Add(txtNombre);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "FormAgregarSocios";
             Text = "FormAgregarSocios";
             Load += FormAgregarSocios_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudCuotaMensual).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
+        private Panel panel1;
+        private Panel panel2;
+        private Label lblTitulo;
+        private Panel panel3;
+        private CheckBox chkCarnetEntrega;
         private Label label7;
         private Label label5;
         private Label label4;
@@ -230,6 +285,5 @@
         private TextBox txtApellido;
         private TextBox txtDNI;
         private TextBox txtNombre;
-        private CheckBox chkCarnetEntrega;
     }
 }

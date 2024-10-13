@@ -28,33 +28,33 @@ namespace ClubDeportivoG3.Entidades
             this.aptoFisico = aptoFisico;
         }
 
-        // Propiedad de solo lectura para Nombre
+        // Propiedad de solo lectura para Nombre. Solo puede obtenerlo pero no modificarlo.
 
         public string Nombre
         {
             get { return nombre; }
         }
-        // Propiedad de solo lectura para Apellido
+        // Propiedad de solo lectura para Apellido. Solo puede obtenerlo pero no modificarlo.
         public string Apellido 
         {
             get { return apellido; }
         }
-        // Propiedad de solo lectura para DNI
+        // Propiedad de solo lectura para DNI. Solo puede obtenerlo pero no modificarlo.
         public string DNI
         {
             get { return dni; }
         }
-        // Propiedad de solo lectura para Mail
+        // Propiedad de solo lectura para Mail. Solo puede obtenerlo pero no modificarlo.
         public string Mail
         {
             get { return mail; }
         }
-        // Propiedad de solo lectura para Telefono
+        // Propiedad de solo lectura para Telefono. Solo puede obtenerlo pero no modificarlo.
         public string Telefono
         {
             get { return telefono; }
         }
-        // Propiedad de solo lectura para AptoFisico
+        // Propiedad de solo lectura para AptoFisico. Solo puede obtenerlo pero no modificarlo.
         public bool AptoFisico
         {
             get { return aptoFisico; }
@@ -64,20 +64,26 @@ namespace ClubDeportivoG3.Entidades
         {
             try
             {
+                // Se crea una conexión a la base de datos usando la instancia de conexión
                 using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
                 {
-                    conn.Open();
-                    string query = "INSERT INTO Cliente (Nombre, Apellido, DNI, Mail, Telefono, Apto_Fisico) VALUES (@Nombre, @Apellido, @DNI, @Mail, @Telefono, @AptoFisico)";
+                    conn.Open(); // Se abre la conexión a la base de datos
 
+                    // Se define la consulta SQL para insertar un nuevo cliente
+                    string query = "INSERT INTO Cliente (Nombre, Apellido, DNI, Mail, Telefono, Apto_Fisico) VALUES (@Nombre, @Apellido, @DNI, @Mail, @Telefono, @AptoFisico)";
+                    
+                    // Se prepara el comando con la consulta y la conexión
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Nombre", this.nombre);
-                        cmd.Parameters.AddWithValue("@Apellido", this.apellido);
-                        cmd.Parameters.AddWithValue("@DNI", this.dni);
-                        cmd.Parameters.AddWithValue("@Mail", this.mail);
-                        cmd.Parameters.AddWithValue("@Telefono", this.telefono);
-                        cmd.Parameters.AddWithValue("@AptoFisico", this.aptoFisico);
+                        // Se añaden los valores de las propiedades del cliente a los parámetros de la consulta
+                        cmd.Parameters.AddWithValue("@Nombre", this.nombre); // Nombre del cliente
+                        cmd.Parameters.AddWithValue("@Apellido", this.apellido); // Apellido del cliente
+                        cmd.Parameters.AddWithValue("@DNI", this.dni); // DNI del cliente
+                        cmd.Parameters.AddWithValue("@Mail", this.mail); // Correo electrónico del cliente
+                        cmd.Parameters.AddWithValue("@Telefono", this.telefono); // Teléfono del cliente
+                        cmd.Parameters.AddWithValue("@AptoFisico", this.aptoFisico); // Estado de aptitud física del cliente
 
+                        // Se ejecuta la consulta para insertar el cliente en la base de datos
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -94,15 +100,20 @@ namespace ClubDeportivoG3.Entidades
         {
             try
             {
+
+                // Se crea una conexión a la base de datos usando la instancia de conexión
                 using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
                 {
-                    conn.Open();
+                    conn.Open(); // Se abre la conexión a la base de datos
+
+                    // Se define la consulta SQL para eliminar un cliente por su ID
                     string query = "DELETE FROM Cliente WHERE id_cliente = @id_cliente";
 
+                    // Se prepara el comando con la consulta y la conexión
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@id_cliente", idCliente);
-                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("@id_cliente", idCliente); // Se añade el ID del cliente a eliminar como parámetro de la consulta
+                        cmd.ExecuteNonQuery(); // Se ejecuta la consulta para eliminar el cliente de la base de datos
                     }
                 }
             }
