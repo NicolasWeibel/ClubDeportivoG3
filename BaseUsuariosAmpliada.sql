@@ -104,3 +104,15 @@ END //
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE PROCEDURE DarBaja(
+    IN p_dni VARCHAR(20)
+)
+BEGIN
+    UPDATE Cliente
+    SET Estado = 'Inactivo'
+    WHERE DNI = p_dni;
+END //
+
+DELIMITER ;
