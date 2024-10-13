@@ -12,40 +12,46 @@ namespace ClubDeportivoG3.Datos
 {
     internal class Usuarios
     {
-        // creamos un metodo que retorne una tabla con la informacion
+        // Método que retorna una tabla con la información del login
         public DataTable Log_Usu(string L_Usu, string P_Usu)
         {
-            MySqlDataReader resultado; // variable de tipo datareader
+            MySqlDataReader resultado; // Variable de tipo DataReader
             DataTable tabla = new DataTable();
-            MySqlConnection sqlCon = new MySqlConnection();
+            MySqlConnection sqlCon = null; // Inicializa la conexión
+
             try
             {
-                sqlCon = Conexion.getInstancia().CrearConcexion();
-                // el comando es un elemento que almacena en este caso el nombre
-                // del procedimiento almacenado y la referencia a la conexion
+                // Crea la conexión
+                sqlCon = Conexion.getInstancia().CrearConexion();
+
+                // El comando almacena el nombre del procedimiento almacenado
                 MySqlCommand comando = new MySqlCommand("IngresoLogin", sqlCon);
                 comando.CommandType = CommandType.StoredProcedure;
-                // definimos los parametros que tiene el procedure
+
+                // Define los parámetros que tiene el procedimiento almacenado
                 comando.Parameters.Add("Usu", MySqlDbType.VarChar).Value = L_Usu;
                 comando.Parameters.Add("Pass", MySqlDbType.VarChar).Value = P_Usu;
-                // abrimos la conexion
+
+                // Abre la conexión
                 sqlCon.Open();
-                resultado = comando.ExecuteReader(); // almacenamos el resulatdo en la variable
-                tabla.Load(resultado); // cargamos la tabla con el resultado
-                return tabla;
-                // de esta forma esta asociado el metodo con el procedure que esta almacenado en MySQL
+
+                // Ejecuta el comando y almacena el resultado
+                resultado = comando.ExecuteReader();
+                tabla.Load(resultado); // Carga la tabla con el resultado
+                return tabla; // Retorna la tabla con los datos
             }
             catch (Exception ex)
             {
-                throw;
+                throw; // Lanza la excepción
             }
-            // como proceso final
             finally
             {
-                if (sqlCon.State == ConnectionState.Open)
-                { sqlCon.Close(); };
+                // Cierra la conexión si está abierta
+                if (sqlCon != null && sqlCon.State == ConnectionState.Open)
+                {
+                    sqlCon.Close();
+                }
             }
         }
     }
-
 }

@@ -10,51 +10,32 @@ namespace ClubDeportivoG3.Datos
 {
     internal class Conexion
     {
-        private string baseDatos;
-        private string servidor;
-        private string puerto;
-        private string usuario;
-        private string clave;
-        private static Conexion? con = null;
+        private static Conexion? _instancia = null;
 
-        private Conexion() {
-            this.baseDatos = "Proyecto";
-            this.servidor = "localhost";
-            this.puerto = "3306";
-            this.usuario = "root";
-            this.clave = "";
-         }
+        private readonly string baseDatos = "baseusuarios";
+        private readonly string servidor = "localhost";
+        private readonly string puerto = "3306";
+        private readonly string usuario = "root";
+        private readonly string clave = "root";
 
-        // proceso de interacción
-        public MySqlConnection CrearConcexion()
-        {
-            // instanciamos una conexion
-            MySqlConnection? cadena = new MySqlConnection();
-            // el bloque try permite controlar errores
-            try
-            {
-                cadena.ConnectionString = "datasource=" + this.servidor +
-                ";port=" + this.puerto +
-                ";username=" + this.usuario +
-                ";password=" + this.clave +
-                ";Database=" + this.baseDatos;
+        // Constructor privado para evitar instanciación externa
+        private Conexion() { }
 
-            }
-            catch (Exception ex)
-            {
-                cadena = null;
-                throw;
-            }
-            return cadena;
-        }
-        // para evaluar la instancia de la conectividad
+        // Método para obtener la instancia única
         public static Conexion getInstancia()
         {
-            if (con == null) // quiere decir que la conexion esta cerrada
+            if (_instancia == null)
             {
-                con = new Conexion(); // se crea una nueva
+                _instancia = new Conexion();
             }
-            return con;
+            return _instancia;
+        }
+
+        // Método para crear la conexión
+        public MySqlConnection CrearConexion()
+        {
+            string cadenaConexion = $"Server={servidor};Port={puerto};Database={baseDatos};User Id={usuario};Password={clave};";
+            return new MySqlConnection(cadenaConexion);
         }
     }
 }
