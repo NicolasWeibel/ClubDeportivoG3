@@ -43,7 +43,7 @@
             txtApellido = new TextBox();
             txtDNI = new TextBox();
             txtNombre = new TextBox();
-            chkCarnet = new CheckBox();
+            chkCarnetEntrega = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)nudCuotaMensual).BeginInit();
             SuspendLayout();
             // 
@@ -174,22 +174,22 @@
             txtNombre.Size = new Size(125, 27);
             txtNombre.TabIndex = 16;
             // 
-            // chkCarnet
+            // chkCarnetEntrega
             // 
-            chkCarnet.AutoSize = true;
-            chkCarnet.Location = new Point(421, 549);
-            chkCarnet.Name = "chkCarnet";
-            chkCarnet.Size = new Size(151, 24);
-            chkCarnet.TabIndex = 31;
-            chkCarnet.Text = "Carnet Engregado";
-            chkCarnet.UseVisualStyleBackColor = true;
+            chkCarnetEntrega.AutoSize = true;
+            chkCarnetEntrega.Location = new Point(421, 549);
+            chkCarnetEntrega.Name = "chkCarnetEntrega";
+            chkCarnetEntrega.Size = new Size(151, 24);
+            chkCarnetEntrega.TabIndex = 31;
+            chkCarnetEntrega.Text = "Carnet Engregado";
+            chkCarnetEntrega.UseVisualStyleBackColor = true;
             // 
             // FormAgregarSocios
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1069, 721);
-            Controls.Add(chkCarnet);
+            Controls.Add(chkCarnetEntrega);
             Controls.Add(label7);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -230,6 +230,6 @@
         private TextBox txtApellido;
         private TextBox txtDNI;
         private TextBox txtNombre;
-        private CheckBox chkCarnet;
+        private CheckBox chkCarnetEntrega;
     }
 }

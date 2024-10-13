@@ -27,12 +27,37 @@ namespace ClubDeportivoG3.Entidades
             this.aptoFisico = aptoFisico;
         }
 
-        public string Nombre => nombre; // Propiedad de solo lectura para Nombre
-        public string Apellido => apellido; // Propiedad de solo lectura para Apellido
-        public string DNI => dni; // Propiedad de solo lectura para DNI
-        public string Mail => mail; // Propiedad de solo lectura para Mail
-        public string Telefono => telefono; // Propiedad de solo lectura para Telefono
-        public bool AptoFisico => aptoFisico; // Propiedad de solo lectura para AptoFisico
+        // Propiedad de solo lectura para Nombre
+
+        public string Nombre
+        {
+            get { return nombre; }
+        }
+        // Propiedad de solo lectura para Apellido
+        public string Apellido 
+        {
+            get { return apellido; }
+        }
+        // Propiedad de solo lectura para DNI
+        public string DNI
+        {
+            get { return dni; }
+        }
+        // Propiedad de solo lectura para Mail
+        public string Mail
+        {
+            get { return mail; }
+        }
+        // Propiedad de solo lectura para Telefono
+        public string Telefono
+        {
+            get { return telefono; }
+        }
+        // Propiedad de solo lectura para AptoFisico
+        public bool AptoFisico
+        {
+            get { return aptoFisico; }
+        }
 
         public virtual void DarAlta()
         {

@@ -27,38 +27,40 @@ namespace ClubDeportivoG3
 
         }
         private void btnGuardar_Click(object sender, EventArgs e)
-        {
-            // Crea un nuevo objeto Socio con los datos del formulario
-            Socio nuevoSocio = new Socio(
-                txtNombre.Text,
-                txtApellido.Text,
-                txtDNI.Text,
-                txtMail.Text,
-                txtTelefono.Text,
-                true, // o ajusta según sea necesario
-                0, // Este ID se asignará en la base de datos
-                chkCarnet.Checked,
-                nudCuotaMensual.Value, // Suponiendo que tienes un NumericUpDown
-                false // Estado de pago inicial
-            );
 
-            // Llama al método de alta del socio
+        {
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
+        string.IsNullOrWhiteSpace(txtApellido.Text) ||
+        string.IsNullOrWhiteSpace(txtDNI.Text) ||
+        string.IsNullOrWhiteSpace(txtMail.Text) ||
+        string.IsNullOrWhiteSpace(txtTelefono.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos obligatorios.", "Campo incompleto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Salimos del método si hay campos vacíos
+            }
+            // Verifica que todos los campos estén correctamente llenos
+
+            Socio nuevoSocio = new Socio(
+    txtNombre.Text,
+    txtApellido.Text,
+    txtDNI.Text,
+    txtMail.Text,
+    txtTelefono.Text,
+    chkAptoFisico.Checked,
+    0, // ID, puedes ajustar este valor según tu lógica
+    chkCarnetEntrega.Checked,
+    nudCuotaMensual.Value,
+    false // Estado de pago inicial
+);
+
+            // Llama al método para guardar el socio
             nuevoSocio.DarAlta();
 
-            // Cierra el formulario
-            this.Close();
+            // Cierra el formulario después de guardar
+            this.DialogResult = DialogResult.OK; // Establece el resultado del diálogo
+            this.Close(); // Cierra el formulario
         }
 
-        private void LimpiarCampos()
-        {
-            txtNombre.Clear();
-            txtApellido.Clear();
-            txtDNI.Clear();
-            txtMail.Clear();
-            txtTelefono.Clear();
-            chkAptoFisico.Checked = false;
-            
-        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {

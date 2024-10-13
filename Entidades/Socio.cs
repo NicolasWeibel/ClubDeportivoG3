@@ -3,8 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ClubDeportivoG3.Entidades
 {
@@ -24,10 +23,10 @@ namespace ClubDeportivoG3.Entidades
             this.estadoPago = estadoPago;
         }
 
-        public int Id => id; // Propiedad de solo lectura para Id
-        public bool CarnetEntrega => carnetEntrega; // Propiedad de solo lectura para carnetEntrega
-        public decimal CuotaMensual => cuotaMensual; // Propiedad de solo lectura para cuotaMensual
-        public bool EstadoPago => estadoPago; // Propiedad de solo lectura para estadoPago
+        public int Id => id;
+        public bool CarnetEntrega => carnetEntrega;
+        public decimal CuotaMensual => cuotaMensual;
+        public bool EstadoPago => estadoPago;
 
         public void AbonarCuota()
         {
@@ -44,49 +43,63 @@ namespace ClubDeportivoG3.Entidades
         public static List<Socio> ListarSocios()
         {
             List<Socio> listaSocios = new List<Socio>();
-
-            try
+            using (MySqlConnection connection = Conexion.getInstancia().CrearConexion())
             {
-                using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
-                {
-                    conn.Open();
-                    string query = "SELECT s.id_socio, s.id_cliente, s.carnet_entregado, s.cuota_mensual, s.estado_pago, c.Nombre AS NombreCliente, c.Apellido AS ApellidoCliente, c.DNI AS DniCliente, c.Mail AS MailCliente, c.Telefono AS TelefonoCliente FROM Socio s INNER JOIN Cliente c ON s.id_cliente = c.id_cliente";
+                connection.Open();
+                string query = @"
+        SELECT 
+            c.id_cliente AS id, 
+            c.nombre, 
+            c.apellido, 
+            c.dni, 
+            c.mail, 
+            c.telefono, 
+            s.carnet_entregado AS carnet, 
+            s.cuota_mensual, 
+            s.estado_pago AS estadoPago 
+        FROM 
+            Socio s 
+        JOIN 
+            Cliente c ON s.id_cliente = c.id_cliente;";
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        while (reader.Read())
                         {
-                            while (reader.Read())
+                            // Obtener el ID del socio
+                            int id = reader.GetInt32("id");
+
+                            // Verifica si el socio ya existe en la lista por ID
+                            var socioExistente = listaSocios.FirstOrDefault(s => s.Id == id);
+
+                            if (socioExistente == null)
                             {
+                                // Crear nuevo socio solo si no existe
                                 Socio socio = new Socio(
-                                    reader.GetString("NombreCliente"),
-                                    reader.GetString("ApellidoCliente"),
-                                    reader.GetString("DniCliente"),
-                                    reader.GetString("MailCliente"),
-                                    reader.GetString("TelefonoCliente"),
-                                    true, // Ajusta según tu lógica
-                                    reader.GetInt32("id_socio"),
-                                    reader.GetBoolean("carnet_entregado"),
+                                    reader.GetString("nombre"),
+                                    reader.GetString("apellido"),
+                                    reader.GetString("dni"),
+                                    reader.GetString("mail"),
+                                    reader.GetString("telefono"),
+                                    reader.GetBoolean("carnet"),
+                                    id, // ID del cliente
+                                    reader.GetBoolean("carnet"), // carnetEntrega
                                     reader.GetDecimal("cuota_mensual"),
-                                    reader.GetBoolean("estado_pago")
+                                    reader.GetBoolean("estadoPago")
                                 );
+
                                 listaSocios.Add(socio);
                             }
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al listar los socios: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return listaSocios; // Retorna la lista de socios
+            return listaSocios;
         }
-    
 
-
-public override void DarAlta()
+        public override void DarAlta()
         {
             // Primero, llama al método de la clase base para registrar el cliente
             base.DarAlta();
@@ -101,11 +114,8 @@ public override void DarAlta()
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
-                        // Aquí necesitas obtener el ID del cliente que acabas de insertar
-                        // Supongamos que tienes un método que obtiene el último ID insertado
                         int idCliente = ObtenerIdClientePorDNI(this.DNI); // Método ficticio
 
-                        // Asigna los parámetros
                         cmd.Parameters.AddWithValue("@id_cliente", idCliente);
                         cmd.Parameters.AddWithValue("@carnet_entregado", carnetEntrega);
                         cmd.Parameters.AddWithValue("@cuota_mensual", cuotaMensual);
@@ -121,20 +131,30 @@ public override void DarAlta()
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones
-                MessageBox.Show("Error al dar de alta al socio: " + ex.Message);
+                MessageBox.Show($"Error al dar de alta al socio: {ex.Message}");
             }
         }
 
-        // Método ficticio para obtener el ID del cliente
         private int ObtenerIdClientePorDNI(string dni)
         {
-            // Lógica para obtener el ID del cliente en base al DNI
-            // Retorna un entero
-            return 1; // Placeholder, debes implementar la lógica
+            int idCliente = 0;
+            using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
+            {
+                conn.Open();
+                string query = "SELECT id_cliente FROM Cliente WHERE dni = @DNI";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@DNI", dni);
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        idCliente = Convert.ToInt32(result);
+                    }
+                }
+            }
+            return idCliente;
         }
 
-        // Método ficticio para asignar el ID al socio
         private void SetId(int id)
         {
             this.id = id;
