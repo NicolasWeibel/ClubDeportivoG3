@@ -17,16 +17,17 @@ namespace ClubDeportivoG3.Datos
         private string clave;
         private static Conexion? con = null;
 
-        private Conexion() {
-            this.baseDatos = "Proyecto";
+        private Conexion()
+        {
+            this.baseDatos = "baseusuarios";
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-            this.clave = "";
-         }
+            this.clave = "root";
+        }
 
         // proceso de interacción
-        public MySqlConnection CrearConcexion()
+        public MySqlConnection CrearConexion()
         {
             // instanciamos una conexion
             MySqlConnection? cadena = new MySqlConnection();

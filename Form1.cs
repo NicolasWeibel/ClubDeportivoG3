@@ -35,7 +35,7 @@ namespace ClubDeportivoG3
 
         private void txtPassword_Enter(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "CONTRASEÑA")
+            if (txtPassword.Text == "CONTRASEÃ‘A")
             {
                 txtPassword.Text = "";
                 txtPassword.UseSystemPasswordChar = true;
@@ -54,7 +54,7 @@ namespace ClubDeportivoG3
         {
             if (txtPassword.Text == "")
             {
-                txtPassword.Text = "CONTRASEÑA";
+                txtPassword.Text = "CONTRASEÃ‘A";
                 txtPassword.UseSystemPasswordChar = false;
             }
         }
@@ -69,6 +69,7 @@ namespace ClubDeportivoG3
                 // quiere decir que el resultado tiene 1 fila por lo que el  usuario EXISTE
                 MessageBox.Show("Ingreso exitoso");
                 OpcionesForm nuevoFormulario = new OpcionesForm(); // Crear instancia del segundo form
+                nuevoFormulario.NombreUsuario = txtUsuario.Text; // Asigna el nombre del usuario a la propiedad NombreUsuario del formulario OpcionesForm
                 nuevoFormulario.Show(); // Mostrar el nuevo form
             }
             else
