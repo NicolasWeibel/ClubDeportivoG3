@@ -35,7 +35,7 @@ namespace ClubDeportivoG3
 
         private void txtPassword_Enter(object sender, EventArgs e)
         {
-            if (txtPassword.Text == "CONTRASEÑA")
+            if (txtPassword.Text == "CONTRASEÃ‘A")
             {
                 txtPassword.Text = "";
                 txtPassword.UseSystemPasswordChar = true;
@@ -54,7 +54,7 @@ namespace ClubDeportivoG3
         {
             if (txtPassword.Text == "")
             {
-                txtPassword.Text = "CONTRASEÑA";
+                txtPassword.Text = "CONTRASEÃ‘A";
                 txtPassword.UseSystemPasswordChar = false;
             }
         }
