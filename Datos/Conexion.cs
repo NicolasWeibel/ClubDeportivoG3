@@ -17,7 +17,6 @@ namespace ClubDeportivoG3.Datos
         private string clave;
         private static Conexion? con = null;
 
-
         private Conexion()
         {
             this.baseDatos = "baseusuarios";
