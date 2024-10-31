@@ -17,23 +17,15 @@ namespace ClubDeportivoG3.Datos
         private string clave;
         private static Conexion? con = null;
 
-<<<<<<< HEAD
-        private Conexion() {
-=======
+
         private Conexion()
         {
->>>>>>> upload-main
             this.baseDatos = "baseusuarios";
             this.servidor = "localhost";
             this.puerto = "3306";
             this.usuario = "root";
-<<<<<<< HEAD
-            this.clave = "1234";
-         }
-=======
             this.clave = "root";
         }
->>>>>>> upload-main
 
         // proceso de interacción
         public MySqlConnection CrearConexion()
